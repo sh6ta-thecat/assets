@@ -1,4 +1,9 @@
-/*underline: none*/
+/*underline: none, text:white, */
 .aunderl{
-  underline:none;
+  text-decoration:none;
+  color:#fff;
+  font-size:15px;
+}
+.aunderl{
+  text-decoration:underline;
 }
