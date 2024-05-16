@@ -12,31 +12,24 @@ document.addEventListener('DOMContentLoaded', function() {
       if (node.tagName === 'TM') {
         // Crear fila en la tabla
         const fila = document.createElement('tr');
+        
+        // Obtener el contenido HTML de la etiqueta <tm>
+        const contenidoHTML = node.innerHTML;
 
-        // Verificar si el contenido de la etiqueta <tm> es solo texto o contiene HTML
-        const contenidoHTML = node.innerHTML.trim();
-        const esSoloTexto = contenidoHTML.indexOf('<') === -1; // No contiene '<'
-
-        // Separar el contenido por el carácter de separación ":"
-        let datos = [];
-        if (esSoloTexto) {
-          datos = contenidoHTML.split(':').map(dato => dato.trim());
-        } else {
-          // Si contiene HTML, conservar el contenido HTML
-          datos.push(contenidoHTML);
-        }
+        // Dividir el contenido por el carácter de separación ":"
+        const datos = contenidoHTML.split(' : ');
 
         // Crear celda para cada dato
         datos.forEach(dato => {
           const celda = document.createElement(cabecera ? 'th' : 'td');
           // Si el dato está vacío, usar un espacio en blanco
-          celda.innerHTML = dato === '' ? ' ' : dato;
+          celda.innerHTML = dato.trim() === '' ? ' ' : dato.trim();
           fila.appendChild(celda);
         });
 
         // Agregar fila a la tabla
         tabla.appendChild(fila);
-
+        
         // Ya no estamos en la cabecera
         cabecera = false;
       }
